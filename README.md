@@ -35,6 +35,12 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Application Screenshot
+
+![Application Screenshot](./public/images/sample1.png)
+
+This screenshot showcases the user interface of the application, featuring a dark-themed chat interface with a sidebar on the left and a main chat area on the right. The chat area displays a user's question "How many R's in strawberry" with a text input field below for entering messages.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
