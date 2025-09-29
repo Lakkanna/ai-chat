@@ -73,6 +73,9 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gray-900 text-white;
+  }
+  html {
+    @apply bg-gray-900;
   }
 }
