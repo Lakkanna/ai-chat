@@ -13,7 +13,7 @@ export function MacrosSection({ dailyData, totals }: MacrosSectionProps) {
   if (!dailyData || !totals) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-400">No data available for this date</p>
+        <p className="text-muted-foreground">No data available for this date</p>
       </div>
     );
   }
@@ -57,22 +57,24 @@ export function MacrosSection({ dailyData, totals }: MacrosSectionProps) {
 
   return (
     <div>
-      <h2 className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6 flex items-center">
+      <h2 className="text-lg sm:text-xl font-semibold text-card-foreground mb-4 sm:mb-6 flex items-center">
         <BarChart3 className="mr-2" size={20} />
         Macros
       </h2>
 
       <div className="space-y-3 sm:space-y-4">
         {macroData.map((macro) => (
-          <div key={macro.name} className="bg-gray-700 rounded-lg p-3 sm:p-4">
+          <div key={macro.name} className="bg-muted rounded-lg p-3 sm:p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-gray-300 font-medium">{macro.name}</span>
-              <span className="text-white font-semibold">
+              <span className="text-muted-foreground font-medium">
+                {macro.name}
+              </span>
+              <span className="text-foreground font-semibold">
                 {macro.current} / {macro.target} {macro.unit}
               </span>
             </div>
 
-            <div className="w-full bg-gray-600 rounded-full h-2 mb-2">
+            <div className="w-full bg-muted-foreground/20 rounded-full h-2 mb-2">
               <div
                 className={`h-2 rounded-full transition-all duration-500 ${macro.color}`}
                 style={{ width: `${Math.min(macro.progress, 100)}%` }}
@@ -80,16 +82,16 @@ export function MacrosSection({ dailyData, totals }: MacrosSectionProps) {
             </div>
 
             <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-400">
+              <span className="text-muted-foreground">
                 {macro.progress.toFixed(1)}% of goal
               </span>
               <span
                 className={`font-semibold ${
                   macro.progress >= 100
-                    ? "text-green-400"
+                    ? "text-green-500"
                     : macro.progress >= 80
-                    ? "text-yellow-400"
-                    : "text-red-400"
+                    ? "text-yellow-500"
+                    : "text-red-500"
                 }`}
               >
                 {macro.progress >= 100
@@ -104,38 +106,38 @@ export function MacrosSection({ dailyData, totals }: MacrosSectionProps) {
       </div>
 
       {/* Macro Summary */}
-      <div className="mt-4 sm:mt-6 bg-gray-700 rounded-lg p-3 sm:p-4">
-        <h3 className="text-base sm:text-lg font-medium text-white mb-2 sm:mb-3">
+      <div className="mt-4 sm:mt-6 bg-muted rounded-lg p-3 sm:p-4">
+        <h3 className="text-base sm:text-lg font-medium text-card-foreground mb-2 sm:mb-3">
           Daily Summary
         </h3>
         <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
           <div>
-            <div className="text-2xl font-bold text-blue-400">
+            <div className="text-2xl font-bold text-blue-500">
               {totalCarbs}g
             </div>
-            <div className="text-gray-400 text-sm">Carbs</div>
+            <div className="text-muted-foreground text-sm">Carbs</div>
           </div>
           <div>
-            <div className="text-2xl font-bold text-green-400">
+            <div className="text-2xl font-bold text-green-500">
               {totalProtein}g
             </div>
-            <div className="text-gray-400 text-sm">Protein</div>
+            <div className="text-muted-foreground text-sm">Protein</div>
           </div>
           <div>
-            <div className="text-2xl font-bold text-yellow-400">
+            <div className="text-2xl font-bold text-yellow-500">
               {totalFat}g
             </div>
-            <div className="text-gray-400 text-sm">Fat</div>
+            <div className="text-muted-foreground text-sm">Fat</div>
           </div>
         </div>
       </div>
 
       {/* Macro Tips */}
-      <div className="mt-3 sm:mt-4 bg-gray-700 rounded-lg p-3 sm:p-4">
-        <h3 className="text-base sm:text-lg font-medium text-white mb-2">
+      <div className="mt-3 sm:mt-4 bg-muted rounded-lg p-3 sm:p-4">
+        <h3 className="text-base sm:text-lg font-medium text-card-foreground mb-2">
           Tips
         </h3>
-        <div className="text-gray-400 text-sm space-y-1">
+        <div className="text-muted-foreground text-sm space-y-1">
           {carbsProgress < 50 && (
             <p>
               • Consider adding more complex carbohydrates like oats, quinoa, or

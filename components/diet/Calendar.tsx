@@ -69,15 +69,15 @@ export function CalendarComponent({
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg p-3 sm:p-4">
+    <div className="bg-card rounded-lg p-3 sm:p-4 border border-border shadow-soft">
       <div className="flex items-center justify-between mb-3 sm:mb-4">
-        <h2 className="text-lg sm:text-xl font-semibold text-white">
+        <h2 className="text-lg sm:text-xl font-semibold text-card-foreground">
           Calendar
         </h2>
         <div className="flex items-center space-x-1 sm:space-x-2">
           <button
             onClick={handlePreviousWeek}
-            className="p-1.5 sm:p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-1.5 sm:p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg transition-colors"
           >
             <ChevronLeft size={18} className="sm:w-5 sm:h-5" />
           </button>
@@ -86,8 +86,8 @@ export function CalendarComponent({
             disabled={!canNavigateNext()}
             className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
               canNavigateNext()
-                ? "text-gray-400 hover:text-white hover:bg-gray-700"
-                : "text-gray-600 cursor-not-allowed"
+                ? "text-muted-foreground hover:text-foreground hover:bg-accent"
+                : "text-muted-foreground/50 cursor-not-allowed"
             }`}
           >
             <ChevronRight size={18} className="sm:w-5 sm:h-5" />
@@ -110,12 +110,12 @@ export function CalendarComponent({
                 disabled={isFutureDate}
                 className={`flex flex-col items-center p-2 sm:p-3 rounded-lg min-w-[60px] sm:min-w-[80px] transition-all duration-200 ${
                   isFutureDate
-                    ? "bg-gray-800 text-gray-600 cursor-not-allowed"
+                    ? "bg-muted text-muted-foreground/50 cursor-not-allowed"
                     : isSelected
                     ? "bg-green-600 text-white"
                     : isTodayDate
-                    ? "bg-gray-700 text-white border-2 border-green-500"
-                    : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
+                    ? "bg-accent text-accent-foreground border-2 border-green-500"
+                    : "bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                 }`}
               >
                 <span className="text-xs sm:text-sm font-medium">
@@ -134,7 +134,7 @@ export function CalendarComponent({
       </div>
 
       <div className="mt-3 sm:mt-4 text-center">
-        <p className="text-gray-400 text-xs sm:text-sm">
+        <p className="text-muted-foreground text-xs sm:text-sm">
           Selected: {formatDate(selectedDate)}
         </p>
       </div>
