@@ -25,7 +25,8 @@
     "remark-gfm": "^4.0.0",
     "remove": "^0.1.5",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",

@@ -6,7 +6,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { streamMessage, ChatMessage, Chat } from "../actions/stream-message";
 import { readStreamableValue } from "ai/rsc";
 
-export async function getChatsFromLocalStorage(): Promise<Chat[]> {
+async function getChatsFromLocalStorage(): Promise<Chat[]> {
   if (typeof window !== "undefined") {
     const chats = localStorage.getItem("chats");
     return chats ? JSON.parse(chats) : [];
@@ -14,14 +14,14 @@ export async function getChatsFromLocalStorage(): Promise<Chat[]> {
   return [];
 }
 
-export async function saveChatsToLocalStorage(chats: Chat[]) {
+async function saveChatsToLocalStorage(chats: Chat[]) {
   if (typeof window !== "undefined") {
     debugger;
     localStorage.setItem("chats", JSON.stringify(chats));
   }
 }
 
-export async function createNewChat(name: string): Promise<Chat> {
+async function createNewChat(name: string): Promise<Chat> {
   return {
     id: Date.now().toString(),
     name,
