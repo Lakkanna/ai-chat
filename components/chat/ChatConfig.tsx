@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Settings, RotateCcw, X, RefreshCw } from "lucide-react";
+import { ThemeToggle } from "../ui/theme-toggle";
 
 interface ChatConfigProps {
   systemPrompt: string;
@@ -79,6 +80,14 @@ export function ChatConfig({
         </div>
 
         <div className="space-y-6">
+          {/* Theme Preference */}
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-3">
+              Theme Preference
+            </h3>
+            <ThemeToggle />
+          </div>
+
           {/* System Prompt Section */}
           <div>
             <div className="flex items-center justify-between mb-3">
