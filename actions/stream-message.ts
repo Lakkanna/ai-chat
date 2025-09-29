@@ -16,14 +16,20 @@ export interface Chat {
   messages: ChatMessage[];
 }
 
-export async function streamMessage(messages: ChatMessage[]) {
+export async function streamMessage(
+  messages: ChatMessage[],
+  systemPrompt?: string
+) {
   const stream = createStreamableValue("");
 
   (async () => {
     const { textStream } = await streamText({
       model: openai("gpt-4o-mini"),
       messages: [
-        { role: "system", content: "You are a helpful assistant." },
+        {
+          role: "system",
+          content: systemPrompt || "You are a helpful assistant.",
+        },
         ...messages,
       ],
     });
