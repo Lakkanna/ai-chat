@@ -412,38 +412,38 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen flex">
+    <div className="bg-background h-screen flex">
       {/* Sidebar */}
       <div
-        className={`w-[300px] bg-gray-800 transition-all duration-300 ${
+        className={`w-[300px] bg-card transition-all duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } fixed top-0 left-0 h-full z-20 lg:translate-x-0`}
+        } fixed top-0 left-0 h-full z-20 lg:translate-x-0 border-r border-border shadow-medium`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-gray-700">
+        <div className="flex items-center justify-between p-4 border-b border-border">
           <Link
             href="/"
-            className="text-white hover:text-gray-300 transition-colors p-2 -ml-2"
+            className="text-card-foreground hover:text-muted-foreground transition-colors p-2 -ml-2"
           >
             <ArrowLeft size={20} />
           </Link>
-          <h2 className="text-xl font-semibold text-white">Chats</h2>
+          <h2 className="text-xl font-semibold text-card-foreground">Chats</h2>
           <div className="flex items-center space-x-2">
             <button
               onClick={toggleSidebar}
-              className="lg:hidden text-white hover:text-gray-300 transition-colors p-1"
+              className="lg:hidden text-card-foreground hover:text-muted-foreground transition-colors p-1"
             >
               <ArrowLeft size={20} className="rotate-90" />
             </button>
             <button
               onClick={() => setShowConfig(true)}
-              className="text-white hover:bg-gray-700 rounded-full p-2 transition-colors"
+              className="text-card-foreground hover:bg-accent rounded-full p-2 transition-colors"
               title="Chat Configuration"
             >
               <Settings size={20} />
             </button>
             <button
               onClick={handleCreateNewChat}
-              className="text-white hover:bg-gray-700 rounded-full p-2 transition-colors"
+              className="text-card-foreground hover:bg-accent rounded-full p-2 transition-colors"
             >
               <Plus size={20} />
             </button>
@@ -456,8 +456,8 @@ export default function ChatPage() {
               key={chat.id}
               className={`group relative p-3 rounded-lg transition-colors ${
                 currentChat?.id === chat.id
-                  ? "bg-gray-700 text-white font-medium"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                  ? "bg-accent text-accent-foreground font-medium"
+                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
               }`}
             >
               <div className="flex items-center justify-between">
@@ -491,13 +491,13 @@ export default function ChatPage() {
       <div
         className={`flex-1 flex flex-col transition-all duration-300 ${
           sidebarOpen ? "ml-[300px]" : "ml-0"
-        } lg:ml-[300px]`}
+        } lg:ml-[300px] h-screen bg-background`}
       >
         {/* Mobile Menu Button and Back Button */}
-        <div className="flex items-center justify-between p-4 lg:hidden">
+        <div className="flex items-center justify-between p-4 lg:hidden flex-shrink-0">
           <button
             onClick={toggleSidebar}
-            className="text-white p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            className="text-foreground p-2 hover:bg-accent rounded-lg transition-colors"
           >
             <Menu size={24} />
           </button>
@@ -510,62 +510,68 @@ export default function ChatPage() {
         </div>
 
         {/* Chat area */}
-        <div className="flex-1 flex flex-col p-4 max-w-[800px] mx-auto w-full">
-          {/* Chat title */}
-          <h1 className="text-xl sm:text-2xl font-bold text-white mb-4">
-            {currentChat ? currentChat.name : "Select or create a chat"}
-          </h1>
+        <div className="flex-1 flex flex-col max-w-[800px] mx-auto w-full min-h-0 chat-container">
+          {/* Chat title - fixed at top */}
+          <div className="p-4 pb-2 flex-shrink-0">
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground">
+              {currentChat ? currentChat.name : "Select or create a chat"}
+            </h1>
+          </div>
 
-          {/* Message rendering area */}
-          <div className="flex-1 overflow-y-auto mb-4 bg-gray-800 rounded-lg">
+          {/* Message rendering area - scrollable */}
+          <div className="flex-1 overflow-y-auto px-4 bg-card rounded-lg mx-4 min-h-0 scroll-smooth border border-border shadow-soft">
             <div className="p-3 sm:p-4 space-y-3 sm:space-y-4">
               {currentChat?.messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`${
+                  className={`chat-message ${
                     message.role === "user"
                       ? "bg-blue-500 text-white self-end ml-auto"
-                      : "bg-gray-700 text-white self-start"
-                  } p-2.5 sm:p-3 rounded-lg max-w-[85%] sm:max-w-[80%] text-sm sm:text-base`}
+                      : "bg-muted text-muted-foreground self-start"
+                  } p-2.5 sm:p-3 rounded-lg max-w-[85%] sm:max-w-[80%] text-sm sm:text-base break-words`}
                 >
                   {message.role === "assistant" ? (
                     <MarkdownRenderer content={message.content} />
                   ) : (
-                    <div className="whitespace-pre-wrap">{message.content}</div>
+                    <div className="whitespace-pre-wrap break-words">
+                      {message.content}
+                    </div>
                   )}
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Input area */}
-          <div className="relative">
-            <TextareaAutosize
-              className="w-full bg-gray-800 text-white rounded-lg pl-4 pr-12 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-white/50"
-              minRows={1}
-              maxRows={5}
-              placeholder="Type your message..."
-              value={inputText}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSendMessage();
-                }
-              }}
-            />
-            <button
-              className={`absolute right-2 bottom-2 text-white rounded-lg p-2 transition-colors flex items-center justify-center ${
-                !inputText.trim()
-                  ? "text-gray-500 cursor-not-allowed"
-                  : "hover:bg-gray-700"
-              }`}
-              aria-label="Send message"
-              disabled={!inputText.trim()}
-              onClick={handleSendMessage}
-            >
-              <Send size={20} />
-            </button>
+          {/* Input area - sticky at bottom */}
+          <div className="p-4 pt-2 flex-shrink-0">
+            <div className="relative">
+              <TextareaAutosize
+                className="w-full bg-muted text-foreground rounded-lg pl-4 pr-12 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-primary border border-border"
+                minRows={1}
+                maxRows={5}
+                placeholder="Type your message..."
+                value={inputText}
+                onChange={handleInputChange}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendMessage();
+                  }
+                }}
+              />
+              <button
+                className={`absolute right-2 bottom-2 text-foreground rounded-lg p-2 transition-colors flex items-center justify-center ${
+                  !inputText.trim()
+                    ? "text-muted-foreground cursor-not-allowed"
+                    : "hover:bg-accent"
+                }`}
+                aria-label="Send message"
+                disabled={!inputText.trim()}
+                onClick={handleSendMessage}
+              >
+                <Send size={20} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -573,7 +579,7 @@ export default function ChatPage() {
       {/* Mobile Sidebar Backdrop */}
       {sidebarOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-10"
+          className="lg:hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-10"
           onClick={toggleSidebar}
         />
       )}
