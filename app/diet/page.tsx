@@ -99,10 +99,10 @@ export default function DietPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <div className="flex-1 min-w-0">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
             Track My Diet
           </h1>
-          <p className="text-gray-400 text-sm sm:text-base">
+          <p className="text-muted-foreground text-sm sm:text-base">
             {formatDate(selectedDate)} {isToday(selectedDate) && "(Today)"}
           </p>
         </div>
@@ -127,12 +127,12 @@ export default function DietPage() {
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Calories Section */}
-        <div className="bg-gray-800 rounded-lg p-4 sm:p-6">
+        <div className="bg-card rounded-lg p-4 sm:p-6 border border-border shadow-soft">
           <CaloriesSection dailyData={dailyData} totals={totals} />
         </div>
 
         {/* Macros Section */}
-        <div className="bg-gray-800 rounded-lg p-4 sm:p-6">
+        <div className="bg-card rounded-lg p-4 sm:p-6 border border-border shadow-soft">
           <MacrosSection dailyData={dailyData} totals={totals} />
         </div>
       </div>

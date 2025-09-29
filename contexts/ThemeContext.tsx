@@ -13,8 +13,9 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system");
+  const [theme, setThemeState] = useState<Theme>("dark"); // Default to dark
   const [actualTheme, setActualTheme] = useState<"light" | "dark">("dark");
+  const [mounted, setMounted] = useState(false);
 
   // Load theme from localStorage on mount
   useEffect(() => {
@@ -22,6 +23,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (savedTheme && ["light", "dark", "system"].includes(savedTheme)) {
       setThemeState(savedTheme);
     }
+    setMounted(true);
   }, []);
 
   // Update actual theme based on system preference
@@ -62,6 +64,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setThemeState(newTheme);
     localStorage.setItem("theme", newTheme);
   };
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return (
+      <ThemeContext.Provider value={{ theme, actualTheme, setTheme }}>
+        <div className="dark">{children}</div>
+      </ThemeContext.Provider>
+    );
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, actualTheme, setTheme }}>

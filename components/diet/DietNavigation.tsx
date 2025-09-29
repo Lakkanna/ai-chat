@@ -59,21 +59,21 @@ export function DietNavigation({
     <>
       {/* Sidebar Navigation */}
       <div
-        className={`w-[250px] bg-gray-800 fixed top-0 left-0 h-full z-20 border-r border-gray-700 transition-all duration-300 ${
+        className={`w-[250px] bg-card fixed top-0 left-0 h-full z-20 border-r border-border transition-all duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0`}
+        } lg:translate-x-0 shadow-medium`}
       >
-        <div className="p-4 border-b border-gray-700 flex items-center justify-between">
+        <div className="p-4 border-b border-border flex items-center justify-between">
           <Link
             href="/"
-            className="text-white hover:text-gray-300 transition-colors flex items-center"
+            className="text-card-foreground hover:text-muted-foreground transition-colors flex items-center"
           >
             <ArrowLeft size={20} className="mr-2" />
             Back to Home
           </Link>
           <button
             onClick={toggleSidebar}
-            className="lg:hidden text-white hover:text-gray-300 transition-colors p-1"
+            className="lg:hidden text-card-foreground hover:text-muted-foreground transition-colors p-1"
           >
             <ArrowLeft size={20} className="rotate-90" />
           </button>
@@ -89,8 +89,8 @@ export function DietNavigation({
                     href={item.href}
                     className={`flex items-center px-3 py-2 rounded-lg transition-colors ${
                       item.isActive
-                        ? "text-white bg-gray-700"
-                        : "text-gray-300 hover:text-white hover:bg-gray-700"
+                        ? "text-accent-foreground bg-accent"
+                        : "text-muted-foreground hover:text-accent-foreground hover:bg-accent"
                     }`}
                   >
                     <Icon size={20} className="mr-3" />
@@ -106,7 +106,7 @@ export function DietNavigation({
       {/* Mobile Sidebar Backdrop */}
       {sidebarOpen && toggleSidebar && (
         <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-10"
+          className="lg:hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-10"
           onClick={toggleSidebar}
         />
       )}
@@ -128,7 +128,7 @@ export function DietLayout({
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen w-full flex">
+    <div className="bg-background min-h-screen w-full flex">
       <DietNavigation
         currentPage={currentPage}
         sidebarOpen={sidebarOpen}
@@ -136,12 +136,12 @@ export function DietLayout({
       />
 
       {/* Main Content */}
-      <div className="flex-1 w-full transition-all duration-300 lg:ml-[250px] bg-gray-900">
+      <div className="flex-1 w-full transition-all duration-300 lg:ml-[250px] bg-background">
         <div className="p-4 lg:p-6 w-full">
           {/* Mobile Menu Button */}
           <button
             onClick={toggleSidebar}
-            className="lg:hidden text-white p-2 mb-4 hover:bg-gray-700 rounded-lg transition-colors"
+            className="lg:hidden text-foreground p-2 mb-4 hover:bg-accent rounded-lg transition-colors"
           >
             <Menu size={24} />
           </button>
@@ -152,7 +152,7 @@ export function DietLayout({
       {/* Mobile Sidebar Backdrop */}
       {sidebarOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-10"
+          className="lg:hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-10"
           onClick={toggleSidebar}
         />
       )}
