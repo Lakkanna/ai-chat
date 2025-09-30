@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noobs Today - Offline</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+        color: white;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .container {
+        max-width: 400px;
+        padding: 2rem;
+      }
+      .icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      h1 {
+        margin: 0 0 1rem;
+        font-size: 1.5rem;
+      }
+      p {
+        margin: 0 0 2rem;
+        color: #9ca3af;
+        line-height: 1.5;
+      }
+      .retry-btn {
+        background: #10b981;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      .retry-btn:hover {
+        background: #059669;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">N</div>
+      <h1>You're Offline</h1>
+      <p>
+        It looks like you're not connected to the internet. Some features may
+        not be available, but you can still use the app with cached data.
+      </p>
+      <button class="retry-btn" onclick="window.location.reload()">
+        Try Again
+      </button>
+    </div>
+  </body>
+</html>
